@@ -140,9 +140,9 @@
   if (window.netlifyIdentity) {
     window.netlifyIdentity.on("init", user => {
       if (!user) {
-        document.body.style.visibility = "hidden";
+        document.body.style.opacity = "0";
         window.netlifyIdentity.on("login", () => {
-          document.body.style.visibility = "visible";
+          document.body.style.opacity = "1";
           location.reload();
         });
         window.netlifyIdentity.open();
