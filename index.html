@@ -137,14 +137,18 @@
 </script>
 
 <script>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", user => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => location.reload());
-            window.netlifyIdentity.open();
-          }
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        document.body.style.visibility = "hidden";
+        window.netlifyIdentity.on("login", () => {
+          document.body.style.visibility = "visible";
+          location.reload();
         });
+        window.netlifyIdentity.open();
       }
+    });
+  }
 </script>
 
 </body>
