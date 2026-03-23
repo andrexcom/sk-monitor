@@ -38,6 +38,7 @@
   footer { text-align: center; padding: 20px; color: #4a5568; font-size: 0.8em; border-top: 1px solid #2d3561; margin-top: 10px; }
   @media (max-width: 768px) { .grid-3 { grid-template-columns: 1fr; } }
 </style>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
 <header>
@@ -134,5 +135,17 @@
 <script>
   document.getElementById('fecha').textContent = new Date().toLocaleString('es-CO', {timeZone:'America/Bogota'}) + ' COT';
 </script>
+
+<script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => location.reload());
+            window.netlifyIdentity.open();
+          }
+        });
+      }
+</script>
+
 </body>
 </html>
