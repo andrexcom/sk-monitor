@@ -1,2 +1,7 @@
 [build]
   publish = "."
+  command = "echo 'static site'"
+  ignore = "exit 1"
+
+[build.environment]
+  PYTHON_VERSION = ""
