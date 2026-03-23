@@ -1,0 +1,36 @@
+name: Skandia Monitor Diario
+
+on:
+  schedule:
+    - cron: '0 12 * * 1-5'  # 7am COT (UTC-5)
+    - cron: '0 17 * * 1-5'  # 12pm COT
+  workflow_dispatch:         # Manual desde GitHub
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Setup Python 3.11
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Instalar dependencias
+      run: pip install -r requirements.txt
+
+    - name: Ejecutar pipeline
+      run: python src/pipeline.py diario
+      env:
+        GMAIL_USER: ${{ secrets.GMAIL_USER }}
+        GMAIL_APP_PASS: ${{ secrets.GMAIL_APP_PASS }}
+
+    - name: Guardar reporte
+      uses: actions/upload-artifact@v4
+      with:
+        name: skandia-report-${{ github.run_number }}
+        path: data/
+        retention-days: 30
