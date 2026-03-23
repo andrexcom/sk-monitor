@@ -1,7 +1,13 @@
 [build]
   publish = "."
-  command = "echo 'static site'"
-  ignore = "exit 1"
 
-[build.environment]
-  PYTHON_VERSION = ""
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  conditions = {Role = ["user"]}
+
+[[redirects]]
+  from = "/*"
+  to = "/login.html"
+  status = 200
