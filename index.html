@@ -137,17 +137,18 @@
 </script>
 
 <script>
-  // Ocultar dashboard hasta login
-  document.addEventListener("DOMContentLoaded", function() {
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
+  window.addEventListener("load", function() {
+    var checkAuth = setInterval(function() {
+      if (window.netlifyIdentity) {
+        clearInterval(checkAuth);
+        var user = window.netlifyIdentity.currentUser();
         if (!user) {
-          document.body.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;height:100vh;background:#0a1628;color:white;font-family:sans-serif;flex-direction:column;gap:20px"><h1>🔐 Skandia Monitor</h1><p>Iniciando sesión...</p></div>';
+          document.body.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;height:100vh;background:#0a1628;color:white;font-family:sans-serif;flex-direction:column;gap:20px"><h1>🔐 Skandia Monitor</h1><p>Acceso restringido</p></div>';
           window.netlifyIdentity.open();
           window.netlifyIdentity.on("login", () => location.reload());
         }
-      });
-    }
+      }
+    }, 100);
   });
 </script>
 
