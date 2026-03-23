@@ -137,18 +137,18 @@
 </script>
 
 <script>
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
-      if (!user) {
-        document.body.style.opacity = "0";
-        window.netlifyIdentity.on("login", () => {
-          document.body.style.opacity = "1";
-          location.reload();
-        });
-        window.netlifyIdentity.open();
-      }
-    });
-  }
+  // Ocultar dashboard hasta login
+  document.addEventListener("DOMContentLoaded", function() {
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          document.body.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;height:100vh;background:#0a1628;color:white;font-family:sans-serif;flex-direction:column;gap:20px"><h1>🔐 Skandia Monitor</h1><p>Iniciando sesión...</p></div>';
+          window.netlifyIdentity.open();
+          window.netlifyIdentity.on("login", () => location.reload());
+        }
+      });
+    }
+  });
 </script>
 
 </body>
