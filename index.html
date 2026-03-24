@@ -192,9 +192,11 @@ async function fetchRent(id, period) {
 
 function colorClass(v) { return v === null ? "" : v >= 0 ? "green" : v < -1.5 ? "red" : "yellow"; }
 function perfilBadge(p) {
-  if (p==="ag")  return '<span class="pill pill-ag">Agresivo</span>';
-  if (p==="mod") return '<span class="pill pill-mod">Moderado</span>';
-  return '<span class="pill pill-con">Conservador</span>';
+  if (p==="Agresivo")    return '<span class="pill pill-ag">Agresivo</span>';
+  if (p==="Moderado")    return '<span class="pill pill-mod">Moderado</span>';
+  if (p==="Conservador") return '<span class="pill pill-con">Conservador</span>';
+  return '<span class="pill pill-mod">' + p + '</span>';
+}
 }
 
 async function cargarTodo() {
